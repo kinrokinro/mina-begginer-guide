@@ -210,7 +210,7 @@
                         <kbd>pip3 install -r requirements.txt</kbd><br>
                         Теперь настроим наш скрипт:<br>
                         <kbd>nano $HOME/mina-snark-stopper/config.yml</kbd><br>
-                        <img src="img/snark-stopper-1.png" class="img-fluid mt-1" alt="Snark Stopper 1"><br>
+                        <img src="img/snark-stopper-1.png" class="img-fluid mt-1 mb-1" alt="Snark Stopper 1"><br>
                         После выполнения этой команды у вас должен открыться текстовый редактор:<br>
                         Нужно заменить значения параметров WORKER_PUB_KEY и WORKER_FEE на желаемые:<br>
                         <kbd>WORKER_PUB_KEY: YOUR_PUBLIC_KEY</kbd> заменить <kbd>YOUR_PUBLIC_KEY</kbd> на
@@ -222,7 +222,7 @@
                         Теперь посмотрим состояния скрипта, для этого вводим команду:<br>
                         <kbd>screen -rd mina-snark-stopper</kbd><br>
                         Результат должен быть примерно такой:<br>
-                        <img src="img/snark-stopper-2.png" class="img-fluid mt-1" alt="Snark Stopper 2"><br>
+                        <img src="img/snark-stopper-2.png" class="img-fluid mt-1 mb-1" alt="Snark Stopper 2"><br>
                         В случае ошибок убедитесь, что:<br>
                         <ul>
                             <li>У вас установлена последняя версия Snark Stopper, для этого выполните следующие команды:
@@ -236,7 +236,7 @@
                             </ul>
                             <li>У вас запущен снарк воркер, для того, чтобы это проверить выполните команду <kbd>coda
                                     client status</kbd>, в графе SNARK WORKER должен находиться ваш ключ:
-                                <img src="img/snark-stopper-3.png" class="img-fluid mt-1" alt="Snark Stopper 3"><br>
+                                <img src="img/snark-stopper-3.png" class="img-fluid mt-1 mb-1" alt="Snark Stopper 3"><br>
                                 Если же его там нет, то выполните следующую команду:<br>
                                 <kbd>coda client set-snark-worker -address $MINA_PUBLIC_KEY</kbd><br>
                                 После выполнения этой команды скрипт должен заработать корректно, иначе - уведомите об
