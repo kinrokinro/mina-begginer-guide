@@ -99,7 +99,7 @@
                     <div>
                         Команда для запуска ноды:<br>
                         <kbd>screen -S mina_node</kbd><br>
-                        <kbd>CODA_PRIVKEY_PASS=%ваш_ключ_из_письма_на_почте% coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/wallet -generate-genesis-proof true -file-log-level Info -run-snark-worker $MINA_PUBLIC_KEY -super-catchup</kbd><br>
+                        <kbd>CODA_PRIVKEY_PASS=%ваш_ключ_из_письма_на_почте% coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/mina-wallet -generate-genesis-proof true -file-log-level Info -run-snark-worker $MINA_PUBLIC_KEY -super-catchup</kbd><br>
                         <kbd>Ctrl + A, затем нажимаем D (все делать в английской раскладке)</kbd><br>
                         Для того, чтоб вернуться в окно с нодой (перезапустить в случае падения/посмотреть как дела) выполните команду <kbd>screen -rd mina_node</kbd> (вместо mina_node может быть что угодно, это название вашего screen окна, которое вы указывали выше при создании screen -S)<br>
                         Проверить статус ноды:<br>
