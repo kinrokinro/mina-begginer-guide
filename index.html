@@ -53,9 +53,9 @@
         </div>
         <div class="row">
             <div class="container">
-                <div class="col-sm">
+                <div class="col-sm mb-4">
                     <h3>0. Покупка сервера</h3>
-                    <button type="button" class="btn btn-primary mb-2" id="vpsButton">Раскрыть содержимое</button><br>
+                    <button type="button" class="btn btn-primary" id="vpsButton">Раскрыть содержимое</button><br>
                     <div id="vpsContent" class="d-none mb-3">
                         Для начала нужно определиться с местом, где мы будем брать наш сервер. Я рекомендую сервис <a
                             href="https://www.vultr.com/?ref=8671282">Vultr.com</a>, поэтому в качестве примера мы будем
@@ -100,241 +100,255 @@
         <div class="row">
             <div class="container">
                 <div class="col-sm">
-                    <h3>1. Установка ключей</h3>
-                    <div>
-                        <div class="mb-2">
-                            Для начала нам нужно подготовить директории для ключей. Для этого вводим:<br>
-                            <kbd>mkdir ~/keys</kbd><br>
-                        </div>
-                        <div class="mb-2">
-                            Далее вам потребуется ссылка на скачивание ключей (поищите у вас в почте, если вы допущены в
-                            тестнет). Для того, чтобы скачать ключи, вводим следующее:<br>
-                            <kbd>wget -O ~/keys/keys.zip %адрес_на_скачку_ключей_с_почты%</kbd><br>
-                            Результат должен выглядеть так:<br>
-                            <kbd>wget -O ~/keys/keys.zip
-                                https://storage.googleapis.com/testworldkeys/asloidfo3129021hfs8982j.zip</kbd><br>
-                        </div>
-                        <div class="mb-2">
-                            Затем необходимо распаковать ключи, для этого выполним следующие команды:
-                            <kbd>apt install unzip</kbd><br>
-                            <kbd>cd ~/keys</kbd><br>
-                            <kbd>unzip keys.zip</kbd><br>
-                        </div>
-                        <div class="mb-2">
-                            В результате распаковки в папке должны появиться два файла с названиями формата:<br>
-                            <kbd>extra_fish_%число%</kbd> и <kbd>extra_fish_%число%.pub</kbd>, нам нужно их
-                            переименовать
-                            для более удобного обращения в дальнейшем<br>
-                            Для этого воспользуемся следующими командами:<br>
-                            <kbd>mv extra_fish_%число% mina-wallet</kbd><br>
-                            <kbd>mv extra_fish_%число%.pub mina-wallet.pub</kbd><br>
-                            <kbd>cd</kbd><br>
-                        </div>
-                        <div class="mb-2">
-                            Установим необходимые права доступа для ключей:<br>
-                            <kbd>chmod 700 $HOME/keys</kbd><br>
-                            <kbd>chmod 600 $HOME/keys/mina-wallet</kbd><br>
-                        </div>
-                        <div class="mb-2">
-                            Далее зададим переменные <kbd>KEYPATH</kbd> и <kbd>MINA_PUBLIC_KEY</kbd>. Для удобства
-                            запишем их в <kbd>.bashrc</kbd><br>
-                            <kbd>echo 'export KEYPATH=$HOME/keys/mina-wallet' >> $HOME/.bashrc</kbd><br>
-                            <kbd>echo 'export MINA_PUBLIC_KEY=$(cat $HOME/keys/mina-wallet.pub)' >>
-                                $HOME/.bashrc</kbd><br>
-                            <kbd>source ~/.bashrc</kbd><br>
-                        </div>
-                        <div class="mb-2">
-                            Осталось скачать список пиров (узлов в сети, необходимо для связи нод друг с другом):<br>
-                            <kbd>wget -O ~/peers.txt
-                                https://raw.githubusercontent.com/MinaProtocol/coda-automation/bug-bounty-net/terraform/testnets/testworld/peers.txt</kbd>
-                        </div>
-                        <div class="alert alert-warning mt-3">
-                            <p>Внимание! Обновляйте пиры раз в 3 часа с помощью скрипта <a
-                                    href="https://github.com/AkiAfroo/minacheckpeers">@AkiAfroo</a>, для этого выполните
-                                следующие команды:</a></p>
-                            <kbd>wget
-                                https://raw.githubusercontent.com/AkiAfroo/minacheckpeers/main/checkpeers</kbd><br>
-                            <kbd>chmod +x checkpeers</kbd><br>
-                            <kbd>bash checkpeers</kbd><br>
-                            <kbd>В появившееся диалоговое окно вводим Y (если есть новые пиры), нажимаем Enter</kbd><br>
-                            Раз в 3 часа нужно выполнять команду <kbd>bash checkpeers</kbd>.<br>
+                    <div class="mb-5">
+                        <h3>1. Установка ключей</h3>
+                        <div>
+                            <div class="mb-4">
+                                Для начала нам нужно подготовить директории для ключей. Для этого вводим:<br>
+                                <kbd>mkdir ~/keys</kbd><br>
+                            </div>
+                            <div class="mb-4">
+                                Далее вам потребуется ссылка на скачивание ключей (поищите у вас в почте, если вы допущены в
+                                тестнет). Для того, чтобы скачать ключи, вводим следующее:<br>
+                                <kbd>wget -O ~/keys/keys.zip %адрес_на_скачку_ключей_с_почты%</kbd><br>
+                                Результат должен выглядеть так:<br>
+                                <kbd>wget -O ~/keys/keys.zip
+                                    https://storage.googleapis.com/testworldkeys/asloidfo3129021hfs8982j.zip</kbd><br>
+                            </div>
+                            <div class="mb-4">
+                                Затем необходимо распаковать ключи, для этого выполним следующие команды:
+                                <kbd>apt install unzip</kbd><br>
+                                <kbd>cd ~/keys</kbd><br>
+                                <kbd>unzip keys.zip</kbd><br>
+                            </div>
+                            <div class="mb-4">
+                                В результате распаковки в папке должны появиться два файла с названиями формата:<br>
+                                <kbd>extra_fish_%число%</kbd> и <kbd>extra_fish_%число%.pub</kbd>, нам нужно их
+                                переименовать
+                                для более удобного обращения в дальнейшем<br>
+                                Для этого воспользуемся следующими командами:<br>
+                                <kbd>mv extra_fish_%число% mina-wallet</kbd><br>
+                                <kbd>mv extra_fish_%число%.pub mina-wallet.pub</kbd><br>
+                                <kbd>cd</kbd><br>
+                            </div>
+                            <div class="mb-4">
+                                Установим необходимые права доступа для ключей:<br>
+                                <kbd>chmod 700 $HOME/keys</kbd><br>
+                                <kbd>chmod 600 $HOME/keys/mina-wallet</kbd><br>
+                            </div>
+                            <div class="mb-4">
+                                Далее зададим переменные <kbd>KEYPATH</kbd> и <kbd>MINA_PUBLIC_KEY</kbd>. Для удобства
+                                запишем их в <kbd>.bashrc</kbd><br>
+                                <kbd>echo 'export KEYPATH=$HOME/keys/mina-wallet' >> $HOME/.bashrc</kbd><br>
+                                <kbd>echo 'export MINA_PUBLIC_KEY=$(cat $HOME/keys/mina-wallet.pub)' >>
+                                    $HOME/.bashrc</kbd><br>
+                                <kbd>source ~/.bashrc</kbd><br>
+                            </div>
+                            <div class="mb-4">
+                                Осталось скачать список пиров (узлов в сети, необходимо для связи нод друг с другом):<br>
+                                <kbd>wget -O ~/peers.txt
+                                    https://raw.githubusercontent.com/MinaProtocol/coda-automation/bug-bounty-net/terraform/testnets/testworld/peers.txt</kbd>
+                            </div>
+                            <div class="alert alert-warning mt-3">
+                                <p>Внимание! Обновляйте пиры раз в 3 часа с помощью скрипта <a
+                                        href="https://github.com/AkiAfroo/minacheckpeers">@AkiAfroo</a>, для этого выполните
+                                    следующие команды:</a></p>
+                                <kbd>wget
+                                    https://raw.githubusercontent.com/AkiAfroo/minacheckpeers/main/checkpeers</kbd><br>
+                                <kbd>chmod +x checkpeers</kbd><br>
+                                <kbd>bash checkpeers</kbd><br>
+                                <kbd>В появившееся диалоговое окно вводим Y (если есть новые пиры), нажимаем Enter</kbd><br>
+                                Раз в 3 часа нужно выполнять команду <kbd>bash checkpeers</kbd>.<br>
+                            </div>
                         </div>
                     </div>
-                    <h3>2. Установка ноды на Ubuntu 18.04</h3>
-                    <div>
-                        <div class="mb-2">
-                            Для начала вам может потребоваться открыть порты на сервере, обычно они открыты, но давайте
-                            в
-                            этом убедимся:<br>
-                            <kbd>sudo apt install ufw</kbd><br>
-                            <kbd>sudo ufw allow 22</kbd><br>
-                            <kbd>sudo ufw allow 8302</kbd><br>
-                            <kbd>sudo ufw allow 8303</kbd><br>
-                            <kbd>sudo ufw enable</kbd><br>
-                        </div>
-
-                        <div class="mb-2">
-                            Далее устанавливаем саму ноду:<br>
-                            <kbd>sudo apt-get remove -y coda-testnet-postake-medium-curves</kbd><br>
-                            <kbd>mkdir .coda-config</kbd><br>
-                            <kbd>sudo apt-get update</kbd><br>
-                            <kbd>sudo apt-get install -y apt-transport-https ca-certificates</kbd><br>
-                            <kbd>echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee
-                                /etc/apt/sources.list.d/mina.list</kbd><br>
-                            <kbd>sudo apt-get update</kbd><br>
-                            <kbd>sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.2.4-16ebdd6
-                                --allow-downgrades</kbd><br>
-                            Проверьте версию ноды командой <kbd>coda version</kbd>, версия должна быть
-                            <kbd>[DIRTY]16ebdd6597ab050fdaf8a075cc39d9b7be1233cf</kbd>,
-                            <br> если версия ноды отличается:
-                            <ul>
-                                <li>Данный гайд не обновлен, актуальную версию вы всегда можете проверить в <a
-                                        href="https://minaprotocol.com/docs/getting-started">официальной
-                                        документации</a>
-                                </li>
-                                <li>Вы что-то сделали не так, повторите пункты начиная с <kbd>sudo apt-get remove -y
-                                        coda-testnet-postake-medium-curves</kbd></li>
-                            </ul>
-                        </div>
-                        Поздравляю! Вы установили ноду Mina.
-                    </div>
-                    <h3>3. Подготовка к майнингу</h3>
-                    <div class="mb-2">
-                        Перед стартом нам потребуются следующие шаги: импортировать аккаунт и разблокировать ключ:<br>
-                        <kbd>coda accounts import -privkey-path $KEYPATH</kbd><br>
-                        В появившемся диалоговом окне необходимо ввести ваш приватный ключ полученный в сообщении на
-                        почте, затем нужно задать пароль, с помощью которого вы в дальнейшем будете разблокировать
-                        аккаунт.<br>
-                        Если все хорошо, то вы увидите сообщение "Successful".<br>
-                        <kbd>coda accounts unlock -public-key $MINA_PUBLIC_KEY</kbd>
-                    </div>
-                    <h3>4. Запуск ноды</h3>
-                    <div class="mb-2">
-                        Для того, чтобы запустить ноду введите в консоли следующие команды:<br>
-                        <kbd>screen -S mina_node</kbd><br>
-                        Далее нам нужно запустить ноду:<br>
-                        <kbd>CODA_PRIVKEY_PASS=%ваш_ключ_из_письма_на_почте% coda daemon -peer-list-file ~/peers.txt
-                            -block-producer-key ~/keys/mina-wallet -generate-genesis-proof true -file-log-level Info
-                            -run-snark-worker $MINA_PUBLIC_KEY -super-catchup</kbd><br>
-                        <kbd>Ctrl + A, затем нажимаем D (все делать в английской раскладке)</kbd><br>
-                        <div class="mb-2">
-                            Проверить статус ноды:<br>
-                            <kbd>coda client status</kbd><br>
-                            или<br>
-                            <kbd>watch -n 30 "coda client status | grep -v 'ip4/'"</kbd> - будет проверять статус каждые
-                            30
-                            секунд и обновлять информацию на экране<br>
-                        </div>
-                        <i>
-                            * Для того, чтоб вернуться в окно с нодой (перезапустить в случае падения/посмотреть как
-                            дела)
-                            выполните команду <kbd>screen -rd mina_node</kbd><br>
-                        </i>
-                        Дождитесь значения Synced в строке Sync status. Поздравляю, нода работает!
-                    </div>
-                    <h3>5. Установка Snark Stopper'а (опционально)</h3>
-                    <div>
-                        <div class="mb-2">
-                            Снарк стоппер пригодится людям, которые размещают блок продюссер и снарк воркер на одной
-                            машине.
-                            <p class="alert alert-info">Cнарк воркер расходует все доступные процессорные ресурсы, а
-                                данный
-                                скрипт останавливает работу снарк воркера если на подходе производство блока и
-                                возообновляет работу снарк воркера, когда производство блока закончилось.</p>
-                        </div>
-                        Установка:<br>
-                        <div class="mb-2">
-                            <kbd>screen -S mina-snark-stopper</kbd><br>
-                            <kbd>sudo apt install jq git python3-venv</kbd><br>
-                            <kbd>git clone https://github.com/c29r3/mina-snark-stopper.git</kbd><br>
-                            <kbd>cd mina-snark-stopper</kbd><br>
-                            <kbd>python3 -m venv venv</kbd><br>
-                            <kbd>source ./venv/bin/activate</kbd><br>
-                            <kbd>pip3 install -r requirements.txt</kbd><br>
-                        </div>
-                        <div class="mb-2">
-                            Теперь настроим наш скрипт:<br>
-                            <kbd>nano $HOME/mina-snark-stopper/config.yml</kbd><br>
-                            <img src="img/snark-stopper-1.png" class="img-fluid mt-1 mb-1" alt="Snark Stopper 1"><br>
-                            После выполнения этой команды у вас должен открыться текстовый редактор:<br>
-                            Нужно заменить значения параметров WORKER_PUB_KEY и WORKER_FEE:<br>
-                            <kbd>WORKER_PUB_KEY: YOUR_PUBLIC_KEY</kbd> заменить <kbd>YOUR_PUBLIC_KEY</kbd> на
-                            <kbd>$MINA_PUBLIC_KEY</kbd><br>
-                            <kbd>WORKER_FEE: 1</kbd> заменить <kbd>1</kbd> на <kbd>0.4-0.5</kbd><br>
-                        </div>
-                        <div class="mb-2">
-                            Запуск:<br>
-                            <kbd>venv/bin/python3 snark-stopper.py</kbd><br>
-                            <kbd>Ctrl + A, затем D (все в английской раскладке)</kbd><br>
-                        </div>
-                        <div class="mb-2">
-                            Теперь посмотрим состояния скрипта, для этого вводим команду:<br>
-                            <kbd>screen -rd mina-snark-stopper</kbd><br>
-                            Результат должен быть примерно такой:<br>
-                            <img src="img/snark-stopper-2.png" class="img-fluid mt-1 mb-1" alt="Snark Stopper 2"><br>
-                        </div>
-                        <div class="mb-2">
-                            В случае ошибок убедитесь, что:<br>
-                            <ul>
-                                <li>У вас установлена последняя версия Snark Stopper, для этого выполните следующие команды:
-                                </li>
+                    <div class="mb-5">
+                        <h3>2. Установка ноды на Ubuntu 18.04</h3>
+                        <div>
+                            <div class="mb-4">
+                                Для начала вам может потребоваться открыть порты на сервере, обычно они открыты, но давайте
+                                в
+                                этом убедимся:<br>
+                                <kbd>sudo apt install ufw</kbd><br>
+                                <kbd>sudo ufw allow 22</kbd><br>
+                                <kbd>sudo ufw allow 8302</kbd><br>
+                                <kbd>sudo ufw allow 8303</kbd><br>
+                                <kbd>sudo ufw enable</kbd><br>
+                            </div>
+    
+                            <div class="mb-4">
+                                Далее устанавливаем саму ноду:<br>
+                                <kbd>sudo apt-get remove -y coda-testnet-postake-medium-curves</kbd><br>
+                                <kbd>mkdir .coda-config</kbd><br>
+                                <kbd>sudo apt-get update</kbd><br>
+                                <kbd>sudo apt-get install -y apt-transport-https ca-certificates</kbd><br>
+                                <kbd>echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee
+                                    /etc/apt/sources.list.d/mina.list</kbd><br>
+                                <kbd>sudo apt-get update</kbd><br>
+                                <kbd>sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.2.4-16ebdd6
+                                    --allow-downgrades</kbd><br>
+                                Проверьте версию ноды командой <kbd>coda version</kbd>, версия должна быть
+                                <kbd>[DIRTY]16ebdd6597ab050fdaf8a075cc39d9b7be1233cf</kbd>,
+                                <br> если версия ноды отличается:
                                 <ul>
-                                    <li><kbd>cd ~/mina-snark-stopper</kbd></li>
-                                    <li><kbd>git pull</kbd><br>Если после этой команды ничего не скачалось, значит версия
-                                        последняя, иначе выполните следующую команду:</li>
-                                    <li><kbd>venv/bin/python3 snark-stopper.py</kbd><br>После выполнения этой команды скрипт
-                                        должен заработать корректно</li>
+                                    <li>Данный гайд не обновлен, актуальную версию вы всегда можете проверить в <a
+                                            href="https://minaprotocol.com/docs/getting-started">официальной
+                                            документации</a>
+                                    </li>
+                                    <li>Вы что-то сделали не так, повторите пункты начиная с <kbd>sudo apt-get remove -y
+                                            coda-testnet-postake-medium-curves</kbd></li>
                                 </ul>
-                                <li>У вас запущен снарк воркер, для того, чтобы это проверить выполните команду <kbd>coda
-                                        client status</kbd>, в графе SNARK WORKER должен находиться ваш ключ:
-                                    <img src="img/snark-stopper-3.png" class="img-fluid mt-1 mb-1"
-                                        alt="Snark Stopper 3"><br>
-                                    Если же его там нет, то выполните следующую команду:<br>
-                                    <kbd>coda client set-snark-worker -address $MINA_PUBLIC_KEY</kbd><br>
-                                    После выполнения этой команды скрипт должен заработать корректно, иначе - уведомите об
-                                    этом <a href="https://github.com/c29r3/mina-snark-stopper/issues">разработчика</a>.
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="mb-2">
-                            Выходим из просмотра:<br>
-                            <kbd>Ctrl + A, затем D (все в английской раскладке)</kbd><br>
-                        </div>
-                        <div class="mb-2">
-                            Если у вас:
-                            <ul>
-                                <li>Статус ноды Synced</li>
-                                <li>Установлена последняя версия ноды (проверять командой <kbd>coda version</kbd>, сверять с
-                                    версией в шапке сайта или в <a
-                                        href="https://minaprotocol.com/docs/getting-started">официальной документации</a>)
-                                </li>
-                                <li>Работает Snark Stopper (если вы его настраивали)</li>
-                            </ul>
-                            В таком случае поздравляю, все получилось отлично, теперь у вас работающая нода Mina!
+                                Поздравляю! Вы установили ноду Mina.
+                            </div>
                         </div>
                     </div>
-                    <h3>Полезная информация</h3>
-                    <div>
-                        <h5>Ссылки</h5>
-                        Mina explorer - <a href="https://minaexplorer.com/">minaexplorer.com</a><br>
-                        Официальная документация - <a
-                            href="https://minaprotocol.com/docs/getting-started">minaprotocol.com</a><br>
-                        Mina Snark Stopper - <a href="https://github.com/c29r3/mina-snark-stopper">github.com</a><br>
-                        Mina Peers Checker - <a href="https://github.com/AkiAfroo/minacheckpeers">github.com</a>
-                        <h5>Команды:</h5>
-                        <strong>Производство блоков:</strong><br>
-                        <kbd>coda client set-staking -public-key $MINA_PUBLIC_KEY</kbd> - установить производство блоков
-                        на адрес $MINA_PUBLIC_KEY<br>
-                        <strong>Производство снарков:</strong><br>
-                        <kbd>coda client set-snark-worker -address $MINA_PUBLIC_KEY</kbd> - указать снарк воркеру
-                        работать на адрес $MINA_PUBLIC_KEY<br>
-                        <kbd>coda client set-snark-work-fee 0.5</kbd> - установить комиссию за снарк в размере 0.5
-                        (рекомендуемая комиссия 0.4-0.5)<br>
-                        <strong>Отправка транзакций:</strong><br>
-                        <kbd>coda client send-payment -amount 0.01 -receiver адрес_получателя -fee 100 -sender
-                            $MINA_PUBLIC_KEY</kbd> - отправить транзакцию в размере 0.01 с комиссией 100 по адресу
-                        адрес_получателя (для отправки аккаунт должен быть разблокирован командой <kbd>coda accounts
-                            unlock -public-key $MINA_PUBLIC_KEY</kbd>)
+                    <div class="mb-5">
+                        <h3>3. Подготовка к майнингу</h3>
+                        <div class="mb-4">
+                            Перед стартом нам потребуются следующие шаги: импортировать аккаунт и разблокировать ключ:<br>
+                            <kbd>coda accounts import -privkey-path $KEYPATH</kbd><br>
+                            В появившемся диалоговом окне необходимо ввести ваш приватный ключ полученный в сообщении на
+                            почте, затем нужно задать пароль, с помощью которого вы в дальнейшем будете разблокировать
+                            аккаунт.<br>
+                        </div>
+                        <div class="mb-4">
+                            Если все хорошо, то вы увидите сообщение "Successful".<br>
+                            <kbd>coda accounts unlock -public-key $MINA_PUBLIC_KEY</kbd>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <h3>4. Запуск ноды</h3>
+                        <div class="mb-4">
+                            Для того, чтобы запустить ноду введите в консоли следующие команды:<br>
+                            <kbd>screen -S mina_node</kbd><br>
+                            Далее нам нужно запустить ноду:<br>
+                            <kbd>CODA_PRIVKEY_PASS=%ваш_ключ_из_письма_на_почте% coda daemon -peer-list-file ~/peers.txt
+                                -block-producer-key ~/keys/mina-wallet -generate-genesis-proof true -file-log-level Info
+                                -run-snark-worker $MINA_PUBLIC_KEY -super-catchup</kbd><br>
+                            <kbd>Ctrl + A, затем нажимаем D (все делать в английской раскладке)</kbd><br>
+                            <div class="mb-4">
+                                Проверить статус ноды:<br>
+                                <kbd>coda client status</kbd><br>
+                                или<br>
+                                <kbd>watch -n 30 "coda client status | grep -v 'ip4/'"</kbd> - будет проверять статус каждые
+                                30
+                                секунд и обновлять информацию на экране<br>
+                            </div>
+                            <i>
+                                * Для того, чтоб вернуться в окно с нодой (перезапустить в случае падения/посмотреть как
+                                дела)
+                                выполните команду <kbd>screen -rd mina_node</kbd><br>
+                            </i>
+                            Дождитесь значения Synced в строке Sync status. Поздравляю, нода работает!
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <h3>5. Установка Snark Stopper'а (опционально)</h3>
+                        <div>
+                            <div class="mb-4">
+                                Снарк стоппер пригодится людям, которые размещают блок продюссер и снарк воркер на одной
+                                машине.
+                                <p class="alert alert-info">Cнарк воркер расходует все доступные процессорные ресурсы, а
+                                    данный
+                                    скрипт останавливает работу снарк воркера если на подходе производство блока и
+                                    возообновляет работу снарк воркера, когда производство блока закончилось.</p>
+                            </div>
+                            Установка:<br>
+                            <div class="mb-4">
+                                <kbd>screen -S mina-snark-stopper</kbd><br>
+                                <kbd>sudo apt install jq git python3-venv</kbd><br>
+                                <kbd>git clone https://github.com/c29r3/mina-snark-stopper.git</kbd><br>
+                                <kbd>cd mina-snark-stopper</kbd><br>
+                                <kbd>python3 -m venv venv</kbd><br>
+                                <kbd>source ./venv/bin/activate</kbd><br>
+                                <kbd>pip3 install -r requirements.txt</kbd><br>
+                            </div>
+                            <div class="mb-4">
+                                Теперь настроим наш скрипт:<br>
+                                <kbd>nano $HOME/mina-snark-stopper/config.yml</kbd><br>
+                                <img src="img/snark-stopper-1.png" class="img-fluid mt-1 mb-1" alt="Snark Stopper 1"><br>
+                                После выполнения этой команды у вас должен открыться текстовый редактор:<br>
+                                Нужно заменить значения параметров WORKER_PUB_KEY и WORKER_FEE:<br>
+                                <kbd>WORKER_PUB_KEY: YOUR_PUBLIC_KEY</kbd> заменить <kbd>YOUR_PUBLIC_KEY</kbd> на
+                                <kbd>$MINA_PUBLIC_KEY</kbd><br>
+                                <kbd>WORKER_FEE: 1</kbd> заменить <kbd>1</kbd> на <kbd>0.4-0.5</kbd><br>
+                            </div>
+                            <div class="mb-4">
+                                Запуск:<br>
+                                <kbd>venv/bin/python3 snark-stopper.py</kbd><br>
+                                <kbd>Ctrl + A, затем D (все в английской раскладке)</kbd><br>
+                            </div>
+                            <div class="mb-4">
+                                Теперь посмотрим состояния скрипта, для этого вводим команду:<br>
+                                <kbd>screen -rd mina-snark-stopper</kbd><br>
+                                Результат должен быть примерно такой:<br>
+                                <img src="img/snark-stopper-2.png" class="img-fluid mt-1 mb-1" alt="Snark Stopper 2"><br>
+                            </div>
+                            <div class="mb-4">
+                                В случае ошибок убедитесь, что:<br>
+                                <ul>
+                                    <li>У вас установлена последняя версия Snark Stopper, для этого выполните следующие команды:
+                                    </li>
+                                    <ul>
+                                        <li><kbd>cd ~/mina-snark-stopper</kbd></li>
+                                        <li><kbd>git pull</kbd><br>Если после этой команды ничего не скачалось, значит версия
+                                            последняя, иначе выполните следующую команду:</li>
+                                        <li><kbd>venv/bin/python3 snark-stopper.py</kbd><br>После выполнения этой команды скрипт
+                                            должен заработать корректно</li>
+                                    </ul>
+                                    <li>У вас запущен снарк воркер, для того, чтобы это проверить выполните команду <kbd>coda
+                                            client status</kbd>, в графе SNARK WORKER должен находиться ваш ключ:
+                                        <img src="img/snark-stopper-3.png" class="img-fluid mt-1 mb-1"
+                                            alt="Snark Stopper 3"><br>
+                                        Если же его там нет, то выполните следующую команду:<br>
+                                        <kbd>coda client set-snark-worker -address $MINA_PUBLIC_KEY</kbd><br>
+                                        После выполнения этой команды скрипт должен заработать корректно, иначе - уведомите об
+                                        этом <a href="https://github.com/c29r3/mina-snark-stopper/issues">разработчика</a>.
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mb-4">
+                                Выходим из просмотра:<br>
+                                <kbd>Ctrl + A, затем D (все в английской раскладке)</kbd><br>
+                            </div>
+                            <div class="mb-4">
+                                Если у вас:
+                                <ul>
+                                    <li>Статус ноды Synced</li>
+                                    <li>Установлена последняя версия ноды (проверять командой <kbd>coda version</kbd>, сверять с
+                                        версией в шапке сайта или в <a
+                                            href="https://minaprotocol.com/docs/getting-started">официальной документации</a>)
+                                    </li>
+                                    <li>Работает Snark Stopper (если вы его настраивали)</li>
+                                </ul>
+                                В таком случае поздравляю, все получилось отлично, теперь у вас работающая нода Mina!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <h3>Полезная информация</h3>
+                        <div>
+                            <h5>Ссылки</h5>
+                            Mina explorer - <a href="https://minaexplorer.com/">minaexplorer.com</a><br>
+                            Официальная документация - <a
+                                href="https://minaprotocol.com/docs/getting-started">minaprotocol.com</a><br>
+                            Mina Snark Stopper - <a href="https://github.com/c29r3/mina-snark-stopper">github.com</a><br>
+                            Mina Peers Checker - <a href="https://github.com/AkiAfroo/minacheckpeers">github.com</a>
+                            <h5>Команды:</h5>
+                            <strong>Производство блоков:</strong><br>
+                            <kbd>coda client set-staking -public-key $MINA_PUBLIC_KEY</kbd> - установить производство блоков
+                            на адрес $MINA_PUBLIC_KEY<br>
+                            <strong>Производство снарков:</strong><br>
+                            <kbd>coda client set-snark-worker -address $MINA_PUBLIC_KEY</kbd> - указать снарк воркеру
+                            работать на адрес $MINA_PUBLIC_KEY<br>
+                            <kbd>coda client set-snark-work-fee 0.5</kbd> - установить комиссию за снарк в размере 0.5
+                            (рекомендуемая комиссия 0.4-0.5)<br>
+                            <strong>Отправка транзакций:</strong><br>
+                            <kbd>coda client send-payment -amount 0.01 -receiver адрес_получателя -fee 100 -sender
+                                $MINA_PUBLIC_KEY</kbd> - отправить транзакцию в размере 0.01 с комиссией 100 по адресу
+                            адрес_получателя (для отправки аккаунт должен быть разблокирован командой <kbd>coda accounts
+                                unlock -public-key $MINA_PUBLIC_KEY</kbd>)
+                        </div>
                     </div>
                 </div>
             </div>
