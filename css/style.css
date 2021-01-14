@@ -1,7 +1,8 @@
 .logo-image {
-    max-height: 100px;
+    max-height: 200px;
     display: flex;
     margin: auto;
+    margin-bottom: 1rem;
 }
 
 /* h3 {
