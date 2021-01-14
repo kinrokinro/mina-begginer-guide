@@ -14,10 +14,23 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="./apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="./ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://www.minanode.info">
@@ -360,6 +373,56 @@
                                 </ul>
                                 В таком случае поздравляю, все получилось отлично, теперь у вас работающая нода Mina!
                             </div>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <h3>Дополнительно: установка нескольких снарк воркеров</h3>
+                        <div class="mb-4">
+                            Требования:
+                            <ul>
+                                <li>Несколько серверов</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            Для установки снарк воркера нам не потребуется разворачивать полноценную ноду, достаточно
+                            внести некоторые изменения в вашу основную ноду (она будет координатором для ваших
+                            дополнительных серверов).<br>
+                            Нам нужно добавить следующие флаги к нашей текущей ноде:
+                            <ul>
+                                <li>-run-snark-coordinator $MINA_PUBLIC_KEY</li>
+                                <li>-snark-worker-fee 0.5</li>
+                                <li>-bind-ip %ваш_IP%</li>
+                            </ul>
+                            В результате ваша команда запуска основной ноды будет иметь такой формат:<br>
+                            <kbd>CODA_PRIVKEY_PASS=%ваш_ключ_из_письма_на_почте% coda daemon -peer-list-file ~/peers.txt
+                                -block-producer-key ~/keys/mina-wallet -generate-genesis-proof true -file-log-level Info
+                                -run-snark-worker $MINA_PUBLIC_KEY -run-snark-coordinator $MINA_PUBLIC_KEY
+                                -snark-worker-fee 0.5 -bind-ip 0.0.0.0 -super-catchup</kbd><br>
+                            Также нам нужно внести адреса наших серверов со снарк воркерами в белый список (это
+                            необходимо делать каждый раз при запуске ноды).<br>
+                            Делается это следующией командой:<br>
+                            <kbd>coda advanced client-trustlist add -ip-address
+                                %IP_адрес_сервера_снарк_вокера%/32</kbd><br>
+                            Повторять эту команду необходимо для каждого вашего снарк воркер сервера.
+                        </div>
+                        <div class="mb-4">
+                            На серверах, которые будут снарк-воркерами нужно выполнить следующие команды:<br>
+                            <kbd>mkdir .coda-config</kbd><br>
+                            <kbd>sudo apt-get update</kbd><br>
+                            <kbd>sudo apt-get install -y apt-transport-https ca-certificates</kbd><br>
+                            <kbd>echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee
+                                /etc/apt/sources.list.d/mina.list</kbd><br>
+                            <kbd>sudo apt-get update</kbd><br>
+                            <kbd>sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.2.4-16ebdd6
+                                --allow-downgrades</kbd><br>
+                            Далее нам необходимо подключиться к нашему снарк координатору (основной ноде), для этого
+                            выполняем следующие команды:<br>
+                            <kbd>screen -S snark_node</kbd><br>
+                            <kbd>coda internal snark-worker -daemon-address %IP_адрес_сервера_снарк_координатора:8301
+                                -proof-level full -shutdown-on-disconnect false</kbd><br>
+                            После этого начнется запуск снарк воркера и скачка необходимых файлов, а в дальнейшем вы
+                            будете наблюдать обычные сообщения о работе снарк воркера формата "SNARK work $work_ids
+                            received from $address" и тому подобные<br>
                         </div>
                     </div>
                     <div class="mb-5">
