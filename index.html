@@ -386,13 +386,13 @@
                             <ul>
                                 <li>-run-snark-coordinator $MINA_PUBLIC_KEY</li>
                                 <li>-snark-worker-fee 0.5</li>
-                                <li>-bind-ip %ваш_IP%</li>
+                                <li>-bind-ip %ip_этого_сервера%</li>
                             </ul>
                             В результате ваша команда запуска основной ноды будет иметь такой формат:<br>
                             <kbd>CODA_PRIVKEY_PASS=%ваш_ключ_из_письма_на_почте% coda daemon -peer-list-file ~/peers.txt
                                 -block-producer-key ~/keys/mina-wallet -generate-genesis-proof true -file-log-level Info
                                 -run-snark-worker $MINA_PUBLIC_KEY -run-snark-coordinator $MINA_PUBLIC_KEY
-                                -snark-worker-fee 0.5 -bind-ip 0.0.0.0 -super-catchup</kbd><br>
+                                -snark-worker-fee 0.5 -bind-ip %ip_этого_сервера% -super-catchup</kbd><br>
                             Также нам нужно внести адреса наших серверов со снарк воркерами в белый список (это
                             необходимо делать каждый раз при запуске ноды).<br>
                             Делается это следующей командой:<br>
