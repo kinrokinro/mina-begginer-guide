@@ -245,13 +245,14 @@
                         </div>
                         <div class="mb-4">
                             In case everything went well you'll get "Successful" message.<br>
-                            <kbd>coda accounts unlock -public-key $MINA_PUBLIC_KEY</kbd>
+                            <!-- <kbd>coda accounts unlock -public-key $MINA_PUBLIC_KEY</kbd> -->
                         </div>
                     </div>
                     <div class="mb-5" id="launch">
                         <h3>4. Node Launch</h3>
                         <div class="mb-4">
                             In order to launch the node, enter the following commands:<br>
+                            <kbd>sudo apt install screen</kbd><br>
                             <kbd>screen -S mina_node</kbd><br>
                             Next:<br>
                             <kbd>CODA_PRIVKEY_PASS=%ваш_ключ_из_письма_на_почте% coda daemon -peer-list-file ~/peers.txt
