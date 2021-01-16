@@ -61,7 +61,6 @@
             <div class="col-sm">
                 <div class="alert alert-success text-center">
                     <p class="mb-0">Latest version: [DIRTY]5c08d6d51111d31269e77f3c62a544b3262ee4c8</p>
-                    <!-- <p class="mb-0">Время релиза: 09.01.2021 at 06:49 AM UTC</p> -->
                 </div>
             </div>
         </div>
@@ -255,7 +254,7 @@
                             <kbd>sudo apt install screen</kbd><br>
                             <kbd>screen -S mina_node</kbd><br>
                             Next:<br>
-                            <kbd>CODA_PRIVKEY_PASS=%ваш_ключ_из_письма_на_почте% coda daemon -peer-list-file ~/peers.txt
+                            <kbd>CODA_PRIVKEY_PASS=%password_from_email% coda daemon -peer-list-file ~/peers.txt
                                 -block-producer-key ~/keys/mina-wallet -generate-genesis-proof true -file-log-level Info
                                 -run-snark-worker $MINA_PUBLIC_KEY -super-catchup</kbd><br>
                             <kbd>Ctrl + A, then D</kbd><br>
@@ -300,7 +299,7 @@
                                 <img src="img/snark-stopper-1.png" class="img-fluid mt-1 mb-1"
                                     alt="Snark Stopper 1"><br>
                                 After this a text editor should appear:<br>
-                                Change attributes WORKER_PUB_KEY и WORKER_FEE:<br>
+                                Change attributes WORKER_PUB_KEY and WORKER_FEE:<br>
                                 <kbd>WORKER_PUB_KEY: YOUR_PUBLIC_KEY</kbd> replace <kbd>YOUR_PUBLIC_KEY</kbd> with
                                 <kbd>$MINA_PUBLIC_KEY</kbd><br>
                                 <kbd>WORKER_FEE: 1</kbd> replace <kbd>1</kbd> with <kbd>0.4-0.5</kbd><br>
@@ -387,10 +386,10 @@
                                 <li>-bind-ip %this_server_ip%</li>
                             </ul>
                             As a result your main node run command will look like this:<br>
-                            <kbd>CODA_PRIVKEY_PASS=%your_key_from_email% coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/mina-wallet -generate-genesis-proof true -file-log-level Info -run-snark-worker $MINA_PUBLIC_KEY -run-snark-coordinator $MINA_PUBLIC_KEY -snark-worker-fee 0.5 -bind-ip %ip_этого_сервера% -super-catchup</kbd><br>
+                            <kbd>CODA_PRIVKEY_PASS=%your_key_from_email% coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/mina-wallet -generate-genesis-proof true -file-log-level Info -run-snark-worker $MINA_PUBLIC_KEY -run-snark-coordinator $MINA_PUBLIC_KEY -snark-worker-fee 0.5 -bind-ip %current_node_ip% -super-catchup</kbd><br>
                             Also we would need to white list our servers (this needs to be done every time you start the node):<br>
                             <kbd>coda advanced client-trustlist add -ip-address
-                                %IP_адрес_сервера_снарк_вокера%/32</kbd><br>
+                                %snark_worker_server_ip%/32</kbd><br>
                             You'll need to repeat this command for every Snark worker server.
                         </div>
                         <div class="mb-4">
