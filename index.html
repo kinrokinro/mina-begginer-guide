@@ -364,45 +364,37 @@
                         </div>
                     </div>
                     <div class="mb-5" id="coordinator">
-                        <h3>Дополнительно: установка нескольких снарк воркеров</h3>
+                        <h3>Addendum: Several Snark Workers Set-up</h3>
                         <div class="alert alert-warning">
-                            Эта процедура может быть полезна тем людям, которые хотят производить больше снарков и имеют
-                            или же арендуют большое количество серверов.
+                            This will be helpful to those who want to produce more Snarks and rent lots of servers.
                         </div>
                         <div class="mb-4">
-                            Требования:
+                            Requirements:
                             <ul>
-                                <li>Несколько серверов со следующей конфигурацией:</li>
+                                <li>Several servers with the following configuration:</li>
                                 <ul>
-                                    <li>Минимум 4 потока</li>
-                                    <li>Минимум 8 гигабайт оперативной памяти</li>
+                                    <li>CPU: min. 4</li>
+                                    <li>RAM: min 8Gb</li>
                                 </ul>
                             </ul>
                         </div>
                         <div class="mb-4">
-                            Для установки снарк воркера нам не потребуется разворачивать полноценную ноду, достаточно
-                            внести некоторые изменения в вашу основную ноду (она будет координатором для ваших
-                            дополнительных серверов).<br>
-                            Нам нужно добавить следующие флаги к нашей текущей ноде:
+                            In order to set-up a Snark worker one don't need to set-up a full node, we just need to make several changes to your main node (this node will work as a coordinator for the rest servers).<br>
+                            We need to add the following flags to the current node::
                             <ul>
                                 <li>-run-snark-coordinator $MINA_PUBLIC_KEY</li>
                                 <li>-snark-worker-fee 0.5</li>
-                                <li>-bind-ip %ip_этого_сервера%</li>
+                                <li>-bind-ip %this_server_ip%</li>
                             </ul>
-                            В результате ваша команда запуска основной ноды будет иметь такой формат:<br>
-                            <kbd>CODA_PRIVKEY_PASS=%ваш_ключ_из_письма_на_почте% coda daemon -peer-list-file ~/peers.txt
-                                -block-producer-key ~/keys/mina-wallet -generate-genesis-proof true -file-log-level Info
-                                -run-snark-worker $MINA_PUBLIC_KEY -run-snark-coordinator $MINA_PUBLIC_KEY
-                                -snark-worker-fee 0.5 -bind-ip %ip_этого_сервера% -super-catchup</kbd><br>
-                            Также нам нужно внести адреса наших серверов со снарк воркерами в белый список (это
-                            необходимо делать каждый раз при запуске ноды).<br>
-                            Делается это следующей командой:<br>
+                            As a result your main node run command will look like this:<br>
+                            <kbd>CODA_PRIVKEY_PASS=%your_key_from_email% coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/mina-wallet -generate-genesis-proof true -file-log-level Info -run-snark-worker $MINA_PUBLIC_KEY -run-snark-coordinator $MINA_PUBLIC_KEY -snark-worker-fee 0.5 -bind-ip %ip_этого_сервера% -super-catchup</kbd><br>
+                            Also we would need to white list our servers (this needs to be done every time you start the node):<br>
                             <kbd>coda advanced client-trustlist add -ip-address
                                 %IP_адрес_сервера_снарк_вокера%/32</kbd><br>
-                            Повторять эту команду необходимо для каждого вашего снарк воркер сервера.
+                            You'll need to repeat this command for every Snark worker server.
                         </div>
                         <div class="mb-4">
-                            На серверах, которые будут снарк-воркерами нужно выполнить следующие команды:<br>
+                            For servers which will be Snark workers we need to execute the following:<br>
                             <kbd>mkdir .coda-config</kbd><br>
                             <kbd>sudo apt-get update</kbd><br>
                             <kbd>sudo apt-get install -y apt-transport-https ca-certificates</kbd><br>
@@ -411,14 +403,11 @@
                             <kbd>sudo apt-get update</kbd><br>
                             <kbd>sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.2.6-5c08d6d
                                 --allow-downgrades</kbd><br>
-                            Далее нам необходимо подключиться к нашему снарк координатору (основной ноде), для этого
-                            выполняем следующие команды:<br>
+                            As a next step we'll need to connect to our Snark coordinator (our main nore):<br>
                             <kbd>screen -S snark_node</kbd><br>
-                            <kbd>coda internal snark-worker -daemon-address %IP_адрес_сервера_снарк_координатора:8301
+                            <kbd>coda internal snark-worker -daemon-address %snark_worker_IP_address%:8301
                                 -proof-level full -shutdown-on-disconnect false</kbd><br>
-                            После этого начнется запуск снарк воркера и скачка необходимых файлов, а в дальнейшем вы
-                            будете наблюдать обычные сообщения о работе снарк воркера формата "SNARK work $work_ids
-                            received from $address" и тому подобные<br>
+                                After this the Snark worker will start and the necessary files will be downloaded (for the first launch, in the next launches you'll see general messages about Snark worker like "SNARK work $work_ids received from $address".<br>
                         </div>
                     </div>
                     <div class="mb-5">
@@ -451,6 +440,9 @@
             </div>
         </div>
     </div>
+    <footer class="text-center mb-1">
+        Made with love by <a href="https://docs.google.com/forms/d/e/1FAIpQLScwF7Ehu9dzbpVSvLy4RIhxvrRTM1FJZ56Vo5Fy-4XU8optHA/viewform">666BANDIT007#2836</a>
+    </footer>
     <script src="js/script.js" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
